@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff1f7">
+  <title>Whatitu Office Maker</title>
+  <style>
+    :root {
+      --pink: #ec4899;
+      --pink-dark: #be185d;
+      --pink-soft: #fce7f3;
+      --ink: #282333;
+      --muted: #82798b;
+      --line: #f1e5ed;
+      --surface: rgba(255,255,255,.82);
+      --shadow: 0 18px 55px rgba(190, 24, 93, .09);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 8% 0%, rgba(251,207,232,.7), transparent 30rem),
+        radial-gradient(circle at 100% 15%, rgba(244,114,182,.13), transparent 27rem),
+        #fffafd;
+    }
+    a { color: inherit; text-decoration: none; }
+    .shell { width: min(1120px, calc(100% - 40px)); margin: auto; }
+    header {
+      height: 78px; display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(241,229,237,.8);
+    }
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: -.5px; }
+    .brand-mark {
+      width: 38px; height: 38px; display: grid; place-items: center; border-radius: 12px;
+      color: white; background: linear-gradient(145deg, #f472b6, #db2777);
+      box-shadow: 0 7px 18px rgba(219,39,119,.23); font-size: 19px;
+    }
+    .brand small { display: block; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: 1.7px; margin-top: 2px; }
+    .top-link { color: var(--muted); font-size: 13px; font-weight: 650; }
+    .hero { padding: 68px 0 35px; text-align: center; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px;
+      border: 1px solid #f8c9df; border-radius: 999px; color: var(--pink-dark);
+      background: rgba(255,255,255,.7); font-size: 11px; font-weight: 800; letter-spacing: 1.2px;
+    }
+    .eyebrow i { width: 7px; height: 7px; border-radius: 50%; background: #ec4899; box-shadow: 0 0 0 4px #fce7f3; }
+    h1 { margin: 19px 0 12px; font-size: clamp(36px, 6vw, 62px); line-height: 1.03; letter-spacing: -3px; }
+    h1 span { color: var(--pink); }
+    .hero p { max-width: 590px; margin: auto; color: var(--muted); line-height: 1.75; font-size: 15px; }
+    .announcement {
+      display: flex; align-items: flex-start; gap: 14px; padding: 17px 19px; margin: 25px auto 42px;
+      max-width: 850px; border: 1px solid #f7c5dc; border-radius: 17px;
+      background: linear-gradient(110deg, #fff0f7, #fff 78%); box-shadow: 0 10px 30px rgba(190,24,93,.05);
+    }
+    .announce-icon { flex: 0 0 35px; height: 35px; display: grid; place-items: center; border-radius: 11px; background: #fce7f3; color: #be185d; font-size: 17px; }
+    .announcement strong { display: block; font-size: 13px; margin: 1px 0 4px; }
+    .announcement p { margin: 0; color: #766878; font-size: 12px; line-height: 1.65; }
+    .announcement a { color: var(--pink-dark); font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; margin: 0 0 16px; }
+    .section-head h2 { margin: 0; font-size: 20px; letter-spacing: -.6px; }
+    .section-head p { margin: 5px 0 0; color: var(--muted); font-size: 12px; }
+    .version-label { color: var(--muted); font-size: 11px; }
+    .apps { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; }
+    .app-card {
+      position: relative; overflow: hidden; padding: 23px; border: 1px solid var(--line);
+      border-radius: 22px; background: var(--surface); box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+    .app-card:before { content:""; position:absolute; width:170px; height:170px; border-radius:50%; right:-70px; top:-80px; background:rgba(244,114,182,.10); }
+    .app-top { display:flex; align-items:center; justify-content:space-between; position:relative; }
+    .app-icon { width:48px; height:48px; border-radius:15px; display:grid; place-items:center; color:white; font-size:22px; font-weight:850; box-shadow:0 8px 18px rgba(190,24,93,.16); }
+    .word-icon { background:linear-gradient(145deg,#60a5fa,#2563eb); }
+    .ppt-icon { background:linear-gradient(145deg,#fb923c,#ea580c); }
+    .status { padding:6px 9px; border-radius:999px; background:#fce7f3; color:#be185d; font-size:10px; font-weight:800; }
+    .app-card h3 { margin:18px 0 5px; font-size:20px; letter-spacing:-.6px; }
+    .app-desc { margin:0; color:var(--muted); font-size:12px; line-height:1.6; }
+    .latest {
+      display:flex; justify-content:space-between; align-items:center; gap:12px; margin:19px 0 17px;
+      padding:13px 14px; border:1px solid #f6d5e5; border-radius:14px; background:#fff7fb;
+    }
+    .latest small { display:block; color:var(--muted); font-size:10px; margin-bottom:4px; }
+    .latest strong { font-size:14px; }
+    .open-btn {
+      display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 13px;
+      border-radius:10px; background:var(--pink); color:white; font-size:11px; font-weight:800;
+      box-shadow:0 6px 14px rgba(236,72,153,.2); transition:.2s;
+    }
+    .open-btn:hover { transform:translateY(-2px); background:var(--pink-dark); }
+    .history-title { display:flex; justify-content:space-between; color:var(--muted); font-size:10px; font-weight:800; letter-spacing:.8px; text-transform:uppercase; margin-bottom:8px; }
+    .version-list { display:grid; gap:7px; }
+    .version-row {
+      display:flex; align-items:center; justify-content:space-between; padding:10px 11px;
+      border:1px solid #f3edf1; border-radius:11px; background:white; font-size:12px;
+      transition:.18s;
+    }
+    .version-row:hover { border-color:#f3a9cc; background:#fff8fc; }
+    .version-row span:first-child { color:#554b5b; font-weight:650; }
+    .version-row span:last-child { color:var(--pink-dark); font-weight:800; font-size:11px; }
+    .version-row.disabled { opacity:.45; pointer-events:none; }
+    .version-row.disabled span:last-child { color:var(--muted); }
+    .footer { display:flex; justify-content:space-between; gap:15px; padding:28px 0 35px; margin-top:35px; border-top:1px solid var(--line); color:var(--muted); font-size:11px; }
+    .footer b { color:#bd4b83; }
+    @media (max-width:700px) {
+      .shell { width:min(100% - 28px, 540px); }
+      header { height:68px; }
+      .hero { padding:52px 0 25px; }
+      h1 { letter-spacing:-2px; }
+      .apps { grid-template-columns:1fr; }
+      .announcement { margin-bottom:32px; }
+      .section-head { align-items:start; flex-direction:column; gap:5px; }
+      .footer { flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <a class="brand" href="/">
+        <span class="brand-mark">W</span>
+        <span>whatitu <small>OFFICE MAKER</small></span>
+      </a>
+      <a class="top-link" href="#applications">Applications ↘</a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow"><i></i> YOUR CREATIVE WORKSPACE</div>
+        <h1>Make work feel<br><span>a little more lovely.</span></h1>
+        <p>Selamat datang di Whatitu Office Maker. Pilih aplikasi yang ingin kamu gunakan dan akses versi terbaru, atau buka kembali versi sebelumnya.</p>
+      </section>
+
+      <!-- ANNOUNCEMENT: ubah teks dan link ini setiap ada update -->
+      <section class="announcement">
+        <div class="announce-icon">↗</div>
+        <div>
+          <strong>What's new? — Whatitu Word telah diperbarui!</strong>
+          <p>Whatitu Word kini tersedia dalam versi <b>v1.1.2</b>. Coba pembaruan terbarunya melalui <a href="/v112.html">link Whatitu Word v1.1.2</a>.</p>
+        </div>
+      </section>
+
+      <section id="applications">
+        <div class="section-head">
+          <div>
+            <h2>Your applications</h2>
+            <p>Semua tools Whatitu Office dalam satu tempat.</p>
+          </div>
+          <span class="version-label">SELECT AN APPLICATION</span>
+        </div>
+
+        <div class="apps">
+          <!-- WHATITU WORD -->
+          <article class="app-card">
+            <div class="app-top">
+              <div class="app-icon word-icon">W</div>
+              <span class="status">● AVAILABLE</span>
+            </div>
+            <h3>Whatitu Word</h3>
+            <p class="app-desc">Create, write, and organize your documents with ease.</p>
+            <div class="latest">
+              <div><small>LATEST VERSION</small><strong>Word v1.1.1</strong></div>
+              <a class="open-btn" href="/v111.html">Open Word ↗</a>
+            </div>
+            <div class="history-title"><span>Version history</span><span>Word</span></div>
+            <div class="version-list"> 
+              <a class="version-row" href="/v111.html"><span>Whatitu Word v1.1.1</span><span>Open ↗</span></a>
+            </div>
+          </article>
+
+          <!-- WHATITU POWERPOINT -->
+          <article class="app-card">
+            <div class="app-top">
+              <div class="app-icon ppt-icon">P</div>
+              <span class="status">● AVAILABLE</span>
+            </div>
+            <h3>Whatitu PowerPoint</h3>
+            <p class="app-desc">Turn your ideas into beautiful and engaging presentations.</p>
+            <div class="latest">
+              <div><small>LATEST VERSION</small><strong>PowerPoint v1.1.1</strong></div>
+              <a class="open-btn" href="/ppt111.html">Open PPT ↗</a>
+            </div>
+            <div class="history-title"><span>Version history</span><span>PowerPoint</span></div>
+            <div class="version-list">
+              <a class="version-row" href="/ppt111.html"><span>Whatitu PowerPoint v1.1.1</span><span>Open ↗</span></a>
+              <a class="version-row disabled" href="#"><span>Older versions</span><span>Coming soon</span></a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>© 2026 <b>Whatitu Office Maker</b>. Made for ideas.</span>
+      <span>Simple tools. Lovely workflow. ♡</span>
+    </footer>
+  </div>
+</body>
+</html>

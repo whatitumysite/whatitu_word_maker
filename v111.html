@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Whatitu Word Maker</title>
+<style>
+:root{--blue:#f7c600;--rib:#f3f3f3;--line:#d4d4d4;--work:#e6e6e6;--txt:#252525;--mut:#616161;--hov:#e1e1e1;--act:#ffe98a;--box:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--rib:#2b2b2b;--line:#454545;--work:#1c1c1c;--txt:#eee;--mut:#aaa;--hov:#3a3a3a;--act:#6b5a10;--box:#333}}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{height:100%;margin:0}
+body{font:13px "Segoe UI",system-ui,-apple-system,Roboto,sans-serif;color:var(--txt);background:var(--work);display:flex;flex-direction:column;overflow:hidden}
+button,select,input{font:inherit;color:var(--txt)}
+#top{background:var(--blue);color:#1f1a00;display:flex;align-items:center;gap:10px;padding:0 12px;height:40px;flex:none}
+#top b{font-size:15px;white-space:nowrap;letter-spacing:.2px}
+#top input{background:transparent;border:0;color:#1f1a00;font-size:13px;width:240px;max-width:40vw;padding:4px 6px;border-radius:3px}
+#top input:focus{background:rgba(255,255,255,.6);outline:none}
+#top .qa{background:transparent;border:0;color:#1f1a00;cursor:pointer;height:28px;min-width:28px;border-radius:3px;font-size:15px}
+#top .qa:hover{background:rgba(0,0,0,.1)}
+#tabs{background:var(--blue);display:flex;gap:2px;padding:0 8px;flex:none;overflow-x:auto}
+#tabs button{background:transparent;border:0;color:#1f1a00;padding:7px 14px;cursor:pointer;border-radius:4px 4px 0 0;white-space:nowrap}
+#tabs button:hover{background:rgba(0,0,0,.1)}
+#tabs button.on{background:var(--rib);color:var(--txt);font-weight:600}
+#tabs button.file{background:#2b2200;color:#ffe066}
+#rib{background:var(--rib);border-bottom:1px solid var(--line);height:88px;flex:none;overflow-x:auto;overflow-y:hidden}
+.pane{display:none;height:100%;padding:4px 8px;white-space:nowrap}
+.pane.on{display:flex}
+.grp{display:flex;flex-direction:column;justify-content:space-between;padding:0 8px;border-right:1px solid var(--line);flex:none}
+.grp .row{display:flex;gap:2px;align-items:center;flex-wrap:nowrap;min-height:30px}
+.grp .cap{text-align:center;color:var(--mut);font-size:11px;padding-bottom:2px}
+.b{background:transparent;border:1px solid transparent;border-radius:3px;min-width:28px;height:28px;padding:0 6px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:4px}
+.b:hover{background:var(--hov);border-color:var(--line)}
+.b.on{background:var(--act);border-color:#8fb4e3}
+.b.big{flex-direction:column;height:56px;min-width:54px;font-size:12px;padding:2px 6px}
+.b.big .ic{font-size:22px;line-height:1.1}
+.b:focus-visible,select:focus-visible,#zoom:focus-visible{outline:2px solid #b38600;outline-offset:1px}
+select,.cin{height:26px;background:var(--box);border:1px solid var(--line);border-radius:3px}
+input[type=color]{width:28px;height:26px;padding:1px;background:var(--box);border:1px solid var(--line);border-radius:3px}
+#area{flex:1;overflow:auto;padding:24px 16px 60px;position:relative}
+#sheetwrap{margin:0 auto;transform-origin:top center;width:794px}
+#page{width:794px;min-height:1123px;background:#fff;color:#000;padding:96px;box-shadow:0 1px 6px rgba(0,0,0,.35);font:11pt/1.5 Calibri,Carlito,"Segoe UI",Arial,sans-serif;outline:none;overflow-wrap:anywhere;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 1117px,#c9c9c9 1117px,#c9c9c9 1123px);background-size:100% 1123px}
+#page.land{width:1123px;min-height:794px;background-size:100% 794px;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 788px,#c9c9c9 788px,#c9c9c9 794px)}
+#page h1{font:700 20pt Calibri,Carlito,Arial,sans-serif;color:#2f5496;margin:.5em 0 .2em}
+#page h2{font:700 15pt Calibri,Carlito,Arial,sans-serif;color:#2f5496;margin:.6em 0 .2em}
+#page h3{font:700 12pt Calibri,Carlito,Arial,sans-serif;color:#1f3763;margin:.6em 0 .2em}
+#page .ttl{font:300 28pt Calibri,Carlito,Arial,sans-serif;margin:0 0 .3em}
+#page p,#page div{margin:0 0 8pt}
+#page table{border-collapse:collapse;width:100%;margin:6pt 0}
+#page td{border:1px solid #888;padding:5px 7px;min-width:40px}
+#page img{max-width:100%}
+#page hr.pb{border:0;border-top:2px dashed #aaa;margin:20px 0}
+#st{background:var(--blue);color:#1f1a00;height:26px;display:flex;align-items:center;gap:16px;padding:0 12px;flex:none;font-size:12px}
+#st .sp{flex:1}
+#zoom{width:130px;accent-color:#1f1a00}
+#file{position:absolute;inset:0;background:var(--rib);z-index:5;display:none;padding:30px 40px}
+#file.on{display:block}
+#file button{display:block;width:260px;text-align:left;background:transparent;border:0;padding:12px 14px;font-size:15px;cursor:pointer;border-radius:4px}
+#file button:hover{background:var(--hov)}
+#file h2{margin:0 0 16px}
+#toast{position:fixed;left:50%;bottom:44px;transform:translateX(-50%);background:#222;color:#fff;padding:9px 16px;border-radius:4px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:9}
+#toast.show{opacity:1}
+@media print{#top,#tabs,#rib,#st,#toast,#file{display:none!important}body{display:block;overflow:visible;background:#fff}#area{overflow:visible;padding:0}#sheetwrap{transform:none!important;width:auto}#page{box-shadow:none;background:none;padding:0;width:auto;min-height:0}}
+</style>
+</head>
+<body>
+<div id="top">
+  <b>Whatitu Word Maker</b>
+  <button class="qa" id="qSave" title="Simpan (Ctrl+S)">💾</button>
+  <button class="qa" data-c="undo" title="Urungkan (Ctrl+Z)">↶</button>
+  <button class="qa" data-c="redo" title="Ulangi (Ctrl+Y)">↷</button>
+  <input id="title" value="Dokumen1" aria-label="Nama dokumen">
+</div>
+<div id="tabs" role="tablist">
+  <button class="file" data-t="file">File</button>
+  <button class="on" data-t="home">Beranda</button>
+  <button data-t="insert">Sisipkan</button>
+  <button data-t="layout">Tata Letak</button>
+  <button data-t="view">Tampilan</button>
+</div>
+<div id="rib">
+  <div class="pane on" id="p-home">
+    <div class="grp"><div class="row"><button class="b big" data-c="cut"><span class="ic">✂</span>Potong</button><button class="b big" data-c="copy"><span class="ic">⧉</span>Salin</button></div><div class="cap">Papan Klip</div></div>
+    <div class="grp">
+      <div class="row"><select id="ff" aria-label="Font"><option>Calibri</option><option>Arial</option><option>Times New Roman</option><option>Georgia</option><option>Verdana</option><option>Courier New</option><option>Cambria</option><option>Trebuchet MS</option></select>
+      <select id="fz" aria-label="Ukuran font"></select></div>
+      <div class="row"><button class="b" data-c="bold"><b>B</b></button><button class="b" data-c="italic"><i>I</i></button><button class="b" data-c="underline"><u>U</u></button><button class="b" data-c="strikeThrough"><s>S</s></button><button class="b" data-c="subscript">x₂</button><button class="b" data-c="superscript">x²</button>
+      <input type="color" id="fc" value="#c00000" title="Warna font"><input type="color" id="hc" value="#ffff00" title="Sorot teks"><button class="b" data-c="removeFormat" title="Hapus format">Aa✕</button></div>
+      <div class="cap">Font</div></div>
+    <div class="grp">
+      <div class="row"><button class="b" data-c="insertUnorderedList" title="Poin">•≡</button><button class="b" data-c="insertOrderedList" title="Nomor">1≡</button><button class="b" data-c="outdent">⇤</button><button class="b" data-c="indent">⇥</button>
+      <select id="ls" title="Jarak baris"><option value="1">1.0</option><option value="1.15">1.15</option><option value="1.5" selected>1.5</option><option value="2">2.0</option></select></div>
+      <div class="row"><button class="b" data-c="justifyLeft">≡</button><button class="b" data-c="justifyCenter">☰</button><button class="b" data-c="justifyRight">≣</button><button class="b" data-c="justifyFull">▤</button></div>
+      <div class="cap">Paragraf</div></div>
+    <div class="grp"><div class="row"><button class="b" data-s="p">Normal</button><button class="b" data-s="ttl">Judul</button><button class="b" data-s="h1"><b>Judul 1</b></button><button class="b" data-s="h2"><b>Judul 2</b></button><button class="b" data-s="h3"><b>Judul 3</b></button><button class="b" data-s="blockquote">Kutipan</button></div><div class="cap">Gaya</div></div>
+    <div class="grp"><div class="row"><button class="b big" id="bFind"><span class="ic">🔍</span>Ganti</button></div><div class="cap">Edit</div></div>
+  </div>
+  <div class="pane" id="p-insert">
+    <div class="grp"><div class="row"><button class="b big" id="bTbl"><span class="ic">▦</span>Tabel</button><button class="b big" id="bPb"><span class="ic">⤓</span>Pindah halaman</button></div><div class="cap">Halaman & Tabel</div></div>
+    <div class="grp"><div class="row"><button class="b big" id="bImg"><span class="ic">🖼</span>Gambar</button><input type="file" id="fi" accept="image/*" hidden></div><div class="cap">Ilustrasi</div></div>
+    <div class="grp"><div class="row"><button class="b big" id="bLink"><span class="ic">🔗</span>Tautan</button><button class="b big" id="bHr"><span class="ic">―</span>Garis</button><button class="b big" id="bDate"><span class="ic">📅</span>Tanggal</button><button class="b big" id="bSym"><span class="ic">Ω</span>Simbol</button></div><div class="cap">Tautan & Teks</div></div>
+  </div>
+  <div class="pane" id="p-layout">
+    <div class="grp"><div class="row"><select id="mg"><option value="96">Normal (2,5 cm)</option><option value="48">Sempit (1,25 cm)</option><option value="144">Lebar (3,8 cm)</option></select></div><div class="row"><select id="ori"><option value="p">Potret</option><option value="l">Lanskap</option></select></div><div class="cap">Pengaturan Halaman</div></div>
+  </div>
+  <div class="pane" id="p-view">
+    <div class="grp"><div class="row"><button class="b big" id="bZ1"><span class="ic">100</span>100%</button><button class="b big" id="bZf"><span class="ic">↔</span>Lebar halaman</button><button class="b big" id="bTh"><span class="ic">◐</span>Tema</button></div><div class="cap">Zoom</div></div>
+  </div>
+</div>
+<div id="area">
+  <div id="file">
+    <h2>File</h2>
+    <button id="fNew">📄 Dokumen baru</button>
+    <button id="fOpen">📂 Buka file (.docx, .html, .txt)</button><input type="file" id="fin" accept=".docx,.html,.htm,.txt,.md,.csv" hidden>
+    <button id="fDx">⬇ Simpan sebagai .docx (Word asli)</button>
+    <button id="fSave">💾 Simpan di browser</button>
+    <button id="fPrint">🖨 Cetak / Simpan PDF</button>
+    <button id="fDoc">⬇ Simpan ke komputer (.html, bisa dibuka di Word)</button>
+    <button id="fTx">⬇ Simpan ke komputer (.txt)</button>
+    <button id="fTxt">⧉ Salin teks</button>
+    <button id="fClose">← Kembali</button>
+  </div>
+  <div id="sheetwrap"><div id="page" contenteditable="true" spellcheck="true"></div></div>
+</div>
+<div id="st"><span id="pg">Halaman 1 dari 1</span><span id="wc">0 kata</span><span id="sv">Belum tersimpan</span><span class="sp"></span><span id="zl">100%</span><input type="range" id="zoom" min="40" max="200" value="100" aria-label="Zoom"></div>
+<div id="toast" role="status"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)},page=$('page'),area=$('area'),wrap=$('sheetwrap'),KEY='word-web-v1',tm;
+function say(m){var t=$('toast');t.textContent=m;t.className='show';clearTimeout(say.x);say.x=setTimeout(function(){t.className=''},1800)}
+function ex(c,v){page.focus();document.execCommand(c,false,v==null?null:v);upd()}
+[8,9,10,11,12,14,16,18,20,24,28,36,48,72].forEach(function(n){var o=document.createElement('option');o.value=n;o.textContent=n;if(n===11)o.selected=true;$('fz').appendChild(o)});
+function sizePt(pt){
+  page.focus();document.execCommand('fontSize',false,'7');
+  page.querySelectorAll('font[size="7"]').forEach(function(f){var s=document.createElement('span');s.style.fontSize=pt+'pt';while(f.firstChild)s.appendChild(f.firstChild);f.parentNode.replaceChild(s,f)});
+  upd();
+}
+function zoom(z){z=Math.max(40,Math.min(200,z));$('zoom').value=z;$('zl').textContent=z+'%';var s=z/100;wrap.style.transform='scale('+s+')';wrap.style.height=(page.offsetHeight*s)+'px';var w=page.offsetWidth*s;wrap.style.marginLeft=Math.max(0,(area.clientWidth-32-w)/2)+'px'}
+function upd(){
+  var t=(page.innerText||'').trim(),w=t?t.split(/\s+/).length:0;
+  $('wc').textContent=w+' kata';
+  var h=page.offsetHeight,ph=page.classList.contains('land')?794:1123;
+  $('pg').textContent='Halaman 1 dari '+Math.max(1,Math.ceil(h/ph));
+  $('sv').textContent='Menyimpan…';clearTimeout(tm);tm=setTimeout(save,700);
+  zoom(+$('zoom').value);sync();
+}
+function save(){try{localStorage.setItem(KEY,JSON.stringify({t:$('title').value,h:page.innerHTML}));$('sv').textContent='Tersimpan'}catch(e){$('sv').textContent='Tidak tersimpan'}}
+function load(){try{var d=JSON.parse(localStorage.getItem(KEY)||'null');if(d){$('title').value=d.t;page.innerHTML=d.h}}catch(e){}
+  if(!page.innerHTML.trim())page.innerHTML='<p class="ttl">Judul dokumen</p><p>Mulai mengetik di sini. Pakai tab Beranda untuk font dan paragraf, Sisipkan untuk tabel dan gambar, Tata Letak untuk margin dan orientasi.</p>'}
+function sync(){['bold','italic','underline','strikeThrough','subscript','superscript','insertUnorderedList','insertOrderedList','justifyLeft','justifyCenter','justifyRight','justifyFull'].forEach(function(c){var b=document.querySelector('.b[data-c="'+c+'"]');if(!b)return;var on=false;try{on=document.queryCommandState(c)}catch(e){}b.classList.toggle('on',on)})}
+document.querySelectorAll('[data-c]').forEach(function(b){b.addEventListener('mousedown',function(e){e.preventDefault()});b.addEventListener('click',function(){ex(b.dataset.c)})});
+document.querySelectorAll('[data-s]').forEach(function(b){b.addEventListener('mousedown',function(e){e.preventDefault()});b.addEventListener('click',function(){
+  var s=b.dataset.s;if(s==='ttl'){ex('formatBlock','<p>');var n=getSelection().anchorNode;while(n&&n!==page&&n.nodeName!=='P')n=n.parentNode;if(n&&n.nodeName==='P')n.className='ttl'}else ex('formatBlock','<'+s+'>')})});
+document.querySelectorAll('#tabs button').forEach(function(b){b.onclick=function(){var t=b.dataset.t;if(t==='file'){$('file').classList.add('on');return}
+  document.querySelectorAll('#tabs button').forEach(function(x){x.classList.remove('on')});b.classList.add('on');
+  document.querySelectorAll('.pane').forEach(function(p){p.classList.toggle('on',p.id==='p-'+t)})}});
+$('ff').onchange=function(e){ex('fontName',e.target.value)};
+$('fz').onchange=function(e){sizePt(e.target.value)};
+$('fc').oninput=function(e){ex('foreColor',e.target.value)};
+$('hc').oninput=function(e){ex('hiliteColor',e.target.value)};
+$('ls').onchange=function(e){page.style.lineHeight=e.target.value;upd()};
+$('mg').onchange=function(e){page.style.padding=e.target.value+'px';upd()};
+$('ori').onchange=function(e){page.classList.toggle('land',e.target.value==='l');upd()};
+$('bHr').onclick=function(){ex('insertHorizontalRule')};
+$('bPb').onclick=function(){ex('insertHTML','<hr class="pb"><p><br></p>')};
+$('bDate').onclick=function(){ex('insertText',new Date().toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'}))};
+$('bSym').onclick=function(){var s=prompt('Pilih simbol: © ® ™ § ¶ • – — ≤ ≥ ± × ÷ € £ ° ½ ¼ ✓ →','©');if(s)ex('insertText',s)};
+$('bLink').onclick=function(){var u=prompt('Alamat tautan (https://…)');if(u&&/^https?:\/\//i.test(u))ex('createLink',u);else if(u)say('Tautan harus diawali https://')};
+$('bTbl').onclick=function(){var r=parseInt(prompt('Jumlah baris','3'),10),c=parseInt(prompt('Jumlah kolom','3'),10);if(!(r>0&&c>0&&r<=50&&c<=10)){say('Baris 1–50, kolom 1–10');return}
+  var h='<table>';for(var i=0;i<r;i++){h+='<tr>';for(var j=0;j<c;j++)h+='<td>&nbsp;</td>';h+='</tr>'}ex('insertHTML',h+'</table><p><br></p>')};
+$('bImg').onclick=function(){$('fi').click()};
+$('fi').onchange=function(e){var f=e.target.files[0];if(!f)return;if(f.size>3e6){say('Gambar maks. 3 MB');return}var r=new FileReader();r.onload=function(){ex('insertImage',r.result)};r.readAsDataURL(f);e.target.value=''};
+$('bFind').onclick=function(){var a=prompt('Cari teks:');if(!a)return;var b=prompt('Ganti dengan:','');if(b===null)return;var n=0,w=document.createTreeWalker(page,NodeFilter.SHOW_TEXT),L=[],x;while(x=w.nextNode())L.push(x);
+  L.forEach(function(t){if(t.nodeValue.indexOf(a)>-1){n+=t.nodeValue.split(a).length-1;t.nodeValue=t.nodeValue.split(a).join(b)}});say(n+' penggantian');upd()};
+$('zoom').oninput=function(e){zoom(+e.target.value)};
+$('bZ1').onclick=function(){zoom(100)};
+$('bZf').onclick=function(){zoom(Math.floor((area.clientWidth-32)/page.offsetWidth*100))};
+$('bTh').onclick=function(){var r=document.documentElement,d=r.getAttribute('data-theme')?r.getAttribute('data-theme')==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.setAttribute('data-theme',d?'light':'dark')};
+$('qSave').onclick=function(){save();say('Tersimpan')};
+$('fClose').onclick=function(){$('file').classList.remove('on')};
+$('fSave').onclick=function(){save();say('Tersimpan di browser');$('file').classList.remove('on')};
+$('fNew').onclick=function(){if(confirm('Buat dokumen baru? Isi saat ini akan dihapus.')){$('title').value='Dokumen1';page.innerHTML='<p><br></p>';$('file').classList.remove('on');upd();page.focus()}};
+$('fPrint').onclick=function(){$('file').classList.remove('on');window.print()};
+$('fTxt').onclick=function(){(navigator.clipboard?navigator.clipboard.writeText(page.innerText):Promise.reject()).then(function(){say('Teks disalin')},function(){say('Gagal menyalin')});$('file').classList.remove('on')};
+var oldDoc=function(){try{var h='<html><head><meta charset="utf-8"></head><body style="font-family:Calibri,Arial;font-size:11pt">'+page.innerHTML+'</body></html>',a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob(['\ufeff'+h],{type:'application/msword'}));a.download=($('title').value||'dokumen').replace(/[^\w\- ]+/g,'')+'.doc';document.body.appendChild(a);a.click();a.remove();say('Mengunduh…')}catch(e){say('Unduh gagal, pakai Cetak / PDF')}$('file').classList.remove('on')};
+function nm(){return ($('title').value||'dokumen').replace(/[^\w\- ]+/g,'').trim()||'dokumen'}
+function dl(ext,data){claude.use('downloads').then(function(d){if(!d){say('Simpan file tidak tersedia, pakai Cetak / PDF');return}
+  d.save({filename:nm()+'.'+ext,data:data}).then(function(){say('Tersimpan ke komputer')},function(e){say(e&&e.code==='declined'?'Dibatalkan':'Gagal menyimpan, pakai Cetak / PDF')})}).catch(function(){say('Simpan file tidak tersedia')});$('file').classList.remove('on')}
+$('fDoc').onclick=function(){dl('html','<!DOCTYPE html><html><head><meta charset="utf-8"><title>'+nm()+'</title></head><body style="font-family:Calibri,Arial;font-size:11pt;line-height:1.5">'+page.innerHTML+'</body></html>')};
+$('fTx').onclick=function(){var t=page.innerText;if(!t.trim()){say('Dokumen kosong');return}dl('txt',t)};
+var BLK={P:1,DIV:1,H1:1,H2:1,H3:1,H4:1,BLOCKQUOTE:1,UL:1,OL:1,LI:1,TABLE:1,HR:1};
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function hx(c){if(!c)return null;var m=/rgba?\((\d+),\s*(\d+),\s*(\d+)/.exec(c);if(m)return [m[1],m[2],m[3]].map(function(n){return ('0'+(+n).toString(16)).slice(-2)}).join('').toUpperCase();m=/^#([0-9a-f]{6})$/i.exec(c);return m?m[1].toUpperCase():null}
+function rpr(f){var s='';
+ if(f.ff){var q=esc(f.ff);s+='<w:rFonts w:ascii="'+q+'" w:hAnsi="'+q+'" w:cs="'+q+'"/>'}
+ if(f.b)s+='<w:b/>';if(f.i)s+='<w:i/>';if(f.s)s+='<w:strike/>';
+ if(f.c)s+='<w:color w:val="'+f.c+'"/>';
+ if(f.sz)s+='<w:sz w:val="'+f.sz+'"/>';
+ if(f.u)s+='<w:u w:val="single"/>';
+ if(f.bg)s+='<w:shd w:val="clear" w:color="auto" w:fill="'+f.bg+'"/>';
+ if(f.v)s+='<w:vertAlign w:val="'+f.v+'"/>';
+ return s?'<w:rPr>'+s+'</w:rPr>':''}
+function inl(n,f,out){
+ if(n.nodeType===3){var t=n.nodeValue.replace(/[\r\n\t]+/g,' ');if(t)out.push('<w:r>'+rpr(f)+'<w:t xml:space="preserve">'+esc(t)+'</w:t></w:r>');return}
+ if(n.nodeType!==1)return;
+ var g=Object.assign({},f),t2=n.tagName,st=n.style||{},td=(st.textDecoration||'')+(st.textDecorationLine||'');
+ if(t2==='BR'){out.push('<w:r><w:br/></w:r>');return}
+ if(t2==='IMG')return;
+ if(t2==='B'||t2==='STRONG'||st.fontWeight==='bold'||+st.fontWeight>=600)g.b=1;
+ if(t2==='I'||t2==='EM'||st.fontStyle==='italic')g.i=1;
+ if(t2==='U'||t2==='A'||/underline/.test(td))g.u=1;
+ if(t2==='S'||t2==='STRIKE'||t2==='DEL'||/line-through/.test(td))g.s=1;
+ if(t2==='SUB')g.v='subscript';
+ if(t2==='SUP')g.v='superscript';
+ if(t2==='A')g.c='0563C1';
+ if(t2==='FONT'){var fc=hx(n.getAttribute('color'));if(fc)g.c=fc;var fa=n.getAttribute('face');if(fa)g.ff=fa}
+ var c2=hx(st.color);if(c2)g.c=c2;
+ var bg=hx(st.backgroundColor);if(bg)g.bg=bg;
+ var m=/([\d.]+)(pt|px)/.exec(st.fontSize||'');if(m)g.sz=Math.round(parseFloat(m[1])*(m[2]==='px'?0.75:1)*2);
+ if(st.fontFamily)g.ff=st.fontFamily.split(',')[0].replace(/["']/g,'').trim();
+ for(var c=n.firstChild;c;c=c.nextSibling)inl(c,g,out)}
+function par(r,o){var s='';
+ if(o.st)s+='<w:pStyle w:val="'+o.st+'"/>';
+ if(o.ind)s+='<w:ind w:left="'+o.ind+'"'+(o.hang?' w:hanging="'+o.hang+'"':'')+'/>';
+ if(o.jc)s+='<w:jc w:val="'+o.jc+'"/>';
+ return '<w:p>'+(s?'<w:pPr>'+s+'</w:pPr>':'')+r+'</w:p>'}
+function blocks(p,out,o){var buf=[];
+ function fl(){if(!buf.length)return;if(o.pre){buf.unshift(o.pre);o.pre=null}out.push(par(buf.join(''),o));buf=[]}
+ for(var c=p.firstChild;c;c=c.nextSibling){
+  if(c.nodeType===3){if(c.nodeValue.trim()||buf.length)inl(c,{},buf)}
+  else if(c.nodeType===1){if(!BLK[c.tagName])inl(c,{},buf);else{fl();blk(c,out,o)}}}
+ fl()}
+function blk(el,out,o){var t=el.tagName,q=Object.assign({},o),a=(el.style&&el.style.textAlign)||el.getAttribute('align')||'';
+ if(a)q.jc={left:'left',center:'center',right:'right',justify:'both'}[a]||q.jc;
+ q.pre=null;
+ if(t==='HR'){out.push(el.className==='pb'?'<w:p><w:r><w:br w:type="page"/></w:r></w:p>':'<w:p><w:pPr><w:pBdr><w:bottom w:val="single" w:sz="6" w:space="1" w:color="808080"/></w:pBdr></w:pPr></w:p>');return}
+ if(/^H[1-3]$/.test(t))q.st='Heading'+t.charAt(1);
+ else if(t==='P'&&el.className==='ttl')q.st='Title';
+ if(t==='BLOCKQUOTE')q.ind=(q.ind||0)+720;
+ if(t==='UL'||t==='OL'){var n=0,lv=(o.lv||0)+1;
+  for(var li=el.firstChild;li;li=li.nextSibling){if(li.tagName!=='LI')continue;n++;
+   var r=Object.assign({},q,{lv:lv,ind:720*lv,hang:360,pre:'<w:r><w:t xml:space="preserve">'+(t==='UL'?'\u2022':n+'.')+'</w:t></w:r><w:r><w:tab/></w:r>'});
+   blocks(li,out,r)}
+  return}
+ if(t==='TABLE'){tbl(el,out);return}
+ q.lv=o.lv;blocks(el,out,q)}
+function tbl(el,out){var rows=el.querySelectorAll('tr'),nc=0;
+ rows.forEach(function(r){nc=Math.max(nc,r.children.length)});if(!nc)return;
+ var cw=Math.floor(9000/nc),s='<w:tbl><w:tblPr><w:tblW w:w="5000" w:type="pct"/><w:tblBorders>'+['top','left','bottom','right','insideH','insideV'].map(function(b){return '<w:'+b+' w:val="single" w:sz="4" w:space="0" w:color="888888"/>'}).join('')+'</w:tblBorders></w:tblPr><w:tblGrid>'+new Array(nc+1).join('<w:gridCol w:w="'+cw+'"/>')+'</w:tblGrid>';
+ rows.forEach(function(r){s+='<w:tr>';
+  for(var i=0;i<nc;i++){var cc=[];if(r.children[i])blocks(r.children[i],cc,{});if(!cc.length)cc.push('<w:p/>');s+='<w:tc><w:tcPr><w:tcW w:w="'+cw+'" w:type="dxa"/></w:tcPr>'+cc.join('')+'</w:tc>'}
+  s+='</w:tr>'});
+ out.push(s+'</w:tbl>','<w:p/>')}
+var NS='http://schemas.openxmlformats.org/wordprocessingml/2006/main',HD='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
+function docXml(){var out=[];blocks(page,out,{});if(!out.length)out.push('<w:p/>');
+ var land=page.classList.contains('land'),pd=Math.round((parseFloat(page.style.padding)||96)*15),w=land?16838:11906,h=land?11906:16838;
+ return HD+'<w:document xmlns:w="'+NS+'"><w:body>'+out.join('')+'<w:sectPr><w:pgSz w:w="'+w+'" w:h="'+h+'"'+(land?' w:orient="landscape"':'')+'/><w:pgMar w:top="'+pd+'" w:right="'+pd+'" w:bottom="'+pd+'" w:left="'+pd+'" w:header="708" w:footer="708" w:gutter="0"/></w:sectPr></w:body></w:document>'}
+function stylesXml(){var lh=Math.round((parseFloat(page.style.lineHeight)||1.5)*240);
+ function H(id,nm,sz,col,lv,b){return '<w:style w:type="paragraph" w:styleId="'+id+'"><w:name w:val="'+nm+'"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:qFormat/><w:pPr>'+(lv>=0?'<w:keepNext/><w:spacing w:before="240" w:after="80"/><w:outlineLvl w:val="'+lv+'"/>':'<w:spacing w:after="80"/>')+'</w:pPr><w:rPr>'+(b?'<w:b/>':'')+'<w:color w:val="'+col+'"/><w:sz w:val="'+sz+'"/></w:rPr></w:style>'}
+ return HD+'<w:styles xmlns:w="'+NS+'"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Calibri" w:hAnsi="Calibri" w:cs="Calibri"/><w:sz w:val="22"/><w:lang w:val="id-ID"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="160" w:line="'+lh+'" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/><w:qFormat/></w:style>'+H('Heading1','heading 1',40,'2F5496',0,1)+H('Heading2','heading 2',30,'2F5496',1,1)+H('Heading3','heading 3',24,'1F3763',2,1)+H('Title','Title',56,'000000',-1,0)+'</w:styles>'}
+function saveDocx(){
+ if(typeof JSZip==='undefined'){say('Pustaka .docx belum dimuat, coba lagi');return}
+ try{var R='http://schemas.openxmlformats.org/officeDocument/2006/relationships',z=new JSZip();
+  z.file('[Content_Types].xml',HD+'<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/></Types>');
+  z.file('_rels/.rels',HD+'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="'+R+'/officeDocument" Target="word/document.xml"/></Relationships>');
+  z.file('word/_rels/document.xml.rels',HD+'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="'+R+'/styles" Target="styles.xml"/></Relationships>');
+  z.file('word/document.xml',docXml());
+  z.file('word/styles.xml',stylesXml());
+  z.generateAsync({type:'blob'}).then(function(b){dl('docx',b)},function(){say('Gagal membuat .docx')})
+ }catch(e){say('Gagal membuat .docx')}}
+function clean(html){var d=new DOMParser().parseFromString(html,'text/html');
+ d.querySelectorAll('script,style,iframe,object,embed,link,meta,form,base,svg,math').forEach(function(n){n.remove()});
+ d.querySelectorAll('*').forEach(function(e){[].slice.call(e.attributes).forEach(function(a){var n=a.name.toLowerCase(),v=a.value;
+  if(n.indexOf('on')===0||n==='srcset'||((n==='href'||n==='src')&&/^\s*(javascript|vbscript|data:(?!image\/))/i.test(v)))e.removeAttribute(a.name)})});
+ return d.body.innerHTML}
+$('fDx').onclick=saveDocx;
+$('fOpen').onclick=function(){$('fin').click()};
+$('fin').onchange=function(e){var f=e.target.files[0];e.target.value='';if(!f)return;
+ var x=(f.name.split('.').pop()||'').toLowerCase(),base=f.name.replace(/\.[^.]+$/,'');
+ if(f.size>15e6){say('File terlalu besar (maks. 15 MB)');return}
+ if((page.innerText||'').trim()&&!confirm('Membuka "'+f.name+'" akan mengganti isi dokumen saat ini. Lanjut?'))return;
+ function put(h){page.innerHTML=clean(h)||'<p><br></p>';$('title').value=base;$('file').classList.remove('on');upd();say('Dibuka: '+f.name)}
+ if(x==='docx'){if(typeof mammoth==='undefined'){say('Pustaka .docx belum dimuat, coba lagi');return}
+  f.arrayBuffer().then(function(ab){return mammoth.convertToHtml({arrayBuffer:ab})}).then(function(r){put(r.value)},function(){say('Gagal membaca file .docx')})}
+ else if(x==='html'||x==='htm'){f.text().then(put)}
+ else if(x==='txt'||x==='md'||x==='csv'){f.text().then(function(t){put(t.split(/\r?\n/).map(function(l){return '<p>'+(esc(l)||'<br>')+'</p>'}).join(''))})}
+ else say('Format .'+x+' belum didukung. Pakai .docx, .html, atau .txt')};
+document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='o'){e.preventDefault();$('fin').click()}});
+page.addEventListener('input',upd);$('title').addEventListener('input',upd);
+document.addEventListener('selectionchange',sync);
+document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();save();say('Tersimpan')}});
+window.addEventListener('resize',function(){zoom(+$('zoom').value)});
+load();upd();
+if(area.clientWidth<860)$('bZf').click();
+})();
+</script>
+</body>
+</html>

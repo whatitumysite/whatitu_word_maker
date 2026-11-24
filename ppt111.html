@@ -1,230 +1,273 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#fff1f7">
-<title>Whatitu PowerPoint — Coming Soon</title>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Whatitu PPT Maker</title>
 <style>
-:root {
-  --pink: #ec4899;
-  --dark: #be185d;
-  --soft: #fce7f3;
-  --ink: #282333;
-  --muted: #82798b;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  font-family: Inter, system-ui, sans-serif;
-  color: var(--ink);
-  background:
-    radial-gradient(circle at 10% 10%, #fbcfe8, transparent 35%),
-    radial-gradient(circle at 90% 90%, #fce7f3, transparent 35%),
-    #fffafd;
-}
-
-.container {
-  width: 100%;
-  max-width: 650px;
-  text-align: center;
-  padding: 55px 30px;
-  border: 1px solid #f5dce9;
-  border-radius: 28px;
-  background: rgba(255,255,255,.85);
-  box-shadow: 0 25px 70px rgba(190,24,93,.10);
-  backdrop-filter: blur(15px);
-}
-
-.logo {
-  width: 75px;
-  height: 75px;
-  margin: auto;
-  display: grid;
-  place-items: center;
-  border-radius: 22px;
-  color: white;
-  font-size: 34px;
-  font-weight: 900;
-  background: linear-gradient(145deg,#fb923c,#ea580c);
-  box-shadow: 0 12px 25px rgba(234,88,12,.22);
-}
-
-.label {
-  display: inline-block;
-  margin-top: 28px;
-  padding: 8px 15px;
-  border: 1px solid #f8c9df;
-  border-radius: 50px;
-  color: var(--dark);
-  background: var(--soft);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-}
-
-h1 {
-  margin: 22px 0 12px;
-  font-size: clamp(32px, 7vw, 48px);
-  line-height: 1.1;
-  letter-spacing: -2px;
-}
-
-h1 span {
-  color: var(--pink);
-}
-
-.description {
-  max-width: 460px;
-  margin: auto;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.8;
-}
-
-.illustration {
-  margin: 35px auto;
-  width: 150px;
-  height: 105px;
-  position: relative;
-}
-
-.slide {
-  position: absolute;
-  width: 115px;
-  height: 78px;
-  border: 2px solid #f9a8d4;
-  border-radius: 12px;
-  background: #fff1f7;
-  box-shadow: 0 10px 20px rgba(190,24,93,.08);
-}
-
-.slide.one {
-  left: 0;
-  top: 15px;
-  transform: rotate(-12deg);
-}
-
-.slide.two {
-  right: 0;
-  top: 5px;
-  transform: rotate(9deg);
-  background: white;
-  display: grid;
-  place-items: center;
-  color: var(--pink);
-  font-size: 30px;
-  font-weight: 900;
-}
-
-.dot {
-  width: 7px;
-  height: 7px;
-  display: inline-block;
-  margin: 3px;
-  border-radius: 50%;
-  background: #f9a8d4;
-}
-
-.message {
-  margin: 25px 0;
-  padding: 17px;
-  border: 1px solid #f6d5e5;
-  border-radius: 15px;
-  background: #fff7fb;
-  color: #76596b;
-  font-size: 13px;
-  line-height: 1.7;
-}
-
-.message strong {
-  color: var(--dark);
-}
-
-.back {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 13px 22px;
-  border-radius: 12px;
-  color: white;
-  background: var(--pink);
-  font-size: 12px;
-  font-weight: 800;
-  text-decoration: none;
-  transition: .2s;
-}
-
-.back:hover {
-  background: var(--dark);
-  transform: translateY(-2px);
-}
-
-footer {
-  margin-top: 35px;
-  color: #a99baa;
-  font-size: 11px;
-}
-
-@media(max-width:480px) {
-  .container {
-    padding: 40px 20px;
-  }
-}
+:root{--blue:#f7c600;--rib:#f3f3f3;--line:#d4d4d4;--work:#e0e0e0;--txt:#252525;--mut:#616161;--hov:#e1e1e1;--act:#ffe98a;--box:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--rib:#2b2b2b;--line:#454545;--work:#1c1c1c;--txt:#eee;--mut:#aaa;--hov:#3a3a3a;--act:#6b5a10;--box:#333}}
+:root[data-theme="dark"]{--rib:#2b2b2b;--line:#454545;--work:#1c1c1c;--txt:#eee;--mut:#aaa;--hov:#3a3a3a;--act:#6b5a10;--box:#333}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{height:100%;margin:0}
+body{font:13px "Segoe UI",system-ui,-apple-system,Roboto,sans-serif;color:var(--txt);background:var(--work);display:flex;flex-direction:column;overflow:hidden}
+button,select,input{font:inherit;color:var(--txt)}
+#top{background:var(--blue);color:#1f1a00;display:flex;align-items:center;gap:8px;padding:0 12px;height:40px;flex:none}
+#top b{font-size:15px;white-space:nowrap}
+#top input{background:transparent;border:0;color:#1f1a00;font-size:13px;width:220px;max-width:36vw;padding:4px 6px;border-radius:3px}
+#top input:focus{background:rgba(255,255,255,.6);outline:none}
+.qa{background:transparent;border:0;color:#1f1a00;cursor:pointer;height:28px;min-width:28px;border-radius:3px;font-size:15px}
+.qa:hover{background:rgba(0,0,0,.1)}
+#tabs{background:var(--blue);display:flex;gap:2px;padding:0 8px;flex:none;overflow-x:auto}
+#tabs button{background:transparent;border:0;color:#1f1a00;padding:7px 14px;cursor:pointer;border-radius:4px 4px 0 0;white-space:nowrap}
+#tabs button:hover{background:rgba(0,0,0,.1)}
+#tabs button.on{background:var(--rib);color:var(--txt);font-weight:600}
+#tabs button.file{background:#2b2200;color:#ffe066}
+#rib{background:var(--rib);border-bottom:1px solid var(--line);height:88px;flex:none;overflow-x:auto;overflow-y:hidden}
+.pane{display:none;height:100%;padding:4px 8px;white-space:nowrap}
+.pane.on{display:flex}
+.grp{display:flex;flex-direction:column;justify-content:space-between;padding:0 8px;border-right:1px solid var(--line);flex:none}
+.row{display:flex;gap:2px;align-items:center;min-height:30px}
+.cap{text-align:center;color:var(--mut);font-size:11px;padding-bottom:2px}
+.b{background:transparent;border:1px solid transparent;border-radius:3px;min-width:28px;height:28px;padding:0 6px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:4px}
+.b:hover{background:var(--hov);border-color:var(--line)}
+.b.on{background:var(--act);border-color:#b38600}
+.b.big{flex-direction:column;height:56px;min-width:54px;font-size:12px;padding:2px 6px}
+.b.big .ic{font-size:22px;line-height:1.1}
+.b:focus-visible,select:focus-visible,#zoom:focus-visible{outline:2px solid #b38600;outline-offset:1px}
+select{height:26px;background:var(--box);border:1px solid var(--line);border-radius:3px}
+input[type=color]{width:28px;height:26px;padding:1px;background:var(--box);border:1px solid var(--line);border-radius:3px}
+.sw{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);padding:0;cursor:pointer}
+#main{flex:1;display:flex;min-height:0}
+#thumbs{width:176px;flex:none;overflow-y:auto;background:var(--rib);border-right:1px solid var(--line);padding:10px 8px}
+.th{position:relative;margin-bottom:10px;cursor:pointer;display:flex;gap:6px;align-items:flex-start}
+.th i{font-style:normal;font-size:11px;color:var(--mut);width:14px;text-align:right;flex:none}
+.th .mini{width:144px;height:81px;overflow:hidden;border:2px solid var(--line);position:relative;background:#fff;flex:none}
+.th.on .mini{border-color:#e0a800;box-shadow:0 0 0 1px #e0a800}
+.mini .st{transform:scale(.15);transform-origin:0 0;pointer-events:none}
+#area{flex:1;overflow:auto;padding:20px 16px 40px;position:relative}
+#wrap{margin:0 auto}
+#stage{width:960px;height:540px;position:relative;overflow:hidden;box-shadow:0 1px 8px rgba(0,0,0,.4);transform-origin:top left;touch-action:none}
+.st{width:960px;height:540px;position:relative;overflow:hidden}
+.el{position:absolute;overflow:hidden;user-select:none;-webkit-user-select:none;line-height:1.25;white-space:pre-wrap;word-break:break-word}
+#stage .el{cursor:move}
+.el.sel{outline:2px solid #1a73e8;overflow:visible}
+.el.ed{user-select:text;-webkit-user-select:text;cursor:text;outline:2px dashed #1a73e8}
+.hd{position:absolute;right:-9px;bottom:-9px;width:18px;height:18px;background:#fff;border:2px solid #1a73e8;border-radius:50%;cursor:nwse-resize;touch-action:none}
+#st{background:var(--blue);color:#1f1a00;height:26px;display:flex;align-items:center;gap:16px;padding:0 12px;flex:none;font-size:12px}
+#st .sp{flex:1}
+#zoom{width:120px;accent-color:#1f1a00}
+#file{position:absolute;inset:0;background:var(--rib);z-index:5;display:none;padding:30px 40px;overflow:auto}
+#file.on{display:block}
+#file button{display:block;width:280px;max-width:100%;text-align:left;background:transparent;border:0;padding:11px 14px;font-size:15px;cursor:pointer;border-radius:4px}
+#file button:hover{background:var(--hov)}
+#file h2{margin:0 0 12px}
+#toast{position:fixed;left:50%;bottom:44px;transform:translateX(-50%);background:#222;color:#fff;padding:9px 16px;border-radius:4px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:99}
+#toast.show{opacity:1}
+#pres{position:fixed;inset:0;background:#000;z-index:50;display:none;align-items:center;justify-content:center}
+#pres.on{display:flex}
+#pres .st{transform-origin:center center;flex:none}
+#pres button{position:absolute;top:calc(8px + env(safe-area-inset-top,0px));right:10px;background:rgba(255,255,255,.2);color:#fff;border:0;border-radius:4px;height:32px;width:32px;cursor:pointer;font-size:16px;z-index:2}
+#pr{display:none}
+@media (max-width:700px){#main{flex-direction:column}#thumbs{width:100%;height:92px;order:2;display:flex;gap:8px;border-right:0;border-top:1px solid var(--line);overflow-x:auto;overflow-y:hidden;padding:6px 8px}.th{margin:0}.th i{display:none}.th .mini{width:112px;height:63px}.mini .st{transform:scale(.1167)}}
+@media print{@page{size:960px 540px;margin:0}body>*:not(#pr){display:none!important}body{display:block;overflow:visible;background:#fff}#pr{display:block}#pr .st{page-break-after:always;break-after:page}}
 </style>
 </head>
-
 <body>
-
-<main class="container">
-
-  <div class="logo">P</div>
-
-  <div class="label">COMING SOON</div>
-
-  <h1>Whatitu <span>PowerPoint</span></h1>
-
-  <p class="description">
-    We're preparing something lovely for your presentations.
-    Whatitu PowerPoint sedang dalam tahap pengembangan
-    untuk memberikan pengalaman membuat presentasi
-    yang lebih mudah dan menyenangkan.
-  </p>
-
-  <div class="illustration">
-    <div class="slide one">
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
+<div id="top">
+  <b>Whatitu PPT Maker</b>
+  <button class="qa" id="qSave" title="Simpan (Ctrl+S)">💾</button>
+  <button class="qa" id="qUn" title="Urungkan (Ctrl+Z)">↶</button>
+  <button class="qa" id="qRe" title="Ulangi (Ctrl+Y)">↷</button>
+  <button class="qa" id="qPl" title="Presentasikan">▶</button>
+  <input id="title" value="Presentasi1" aria-label="Nama presentasi">
+</div>
+<div id="tabs" role="tablist">
+  <button class="file" data-t="file">File</button>
+  <button class="on" data-t="home">Beranda</button>
+  <button data-t="insert">Sisipkan</button>
+  <button data-t="design">Desain</button>
+  <button data-t="view">Tampilan</button>
+</div>
+<div id="rib">
+  <div class="pane on" id="p-home">
+    <div class="grp"><div class="row"><button class="b big" id="bNew"><span class="ic">➕</span>Slide baru</button><button class="b big" id="bDup"><span class="ic">⧉</span>Duplikat</button><button class="b big" id="bDel"><span class="ic">🗑</span>Hapus slide</button></div><div class="cap">Slide</div></div>
+    <div class="grp">
+      <div class="row"><select id="ly" aria-label="Tata letak"><option value="title">Judul</option><option value="content" selected>Judul + isi</option><option value="blank">Kosong</option></select>
+      <select id="ff" aria-label="Font"><option>Calibri</option><option>Arial</option><option>Times New Roman</option><option>Georgia</option><option>Verdana</option><option>Courier New</option><option>Trebuchet MS</option></select>
+      <select id="fz" aria-label="Ukuran"></select></div>
+      <div class="row"><button class="b" id="bB"><b>B</b></button><button class="b" id="bI"><i>I</i></button><button class="b" id="bU"><u>U</u></button>
+      <input type="color" id="fc" value="#222222" title="Warna teks / isi"><button class="b" data-a="left">≡</button><button class="b" data-a="center">☰</button><button class="b" data-a="right">≣</button></div>
+      <div class="cap">Teks & Objek</div></div>
+    <div class="grp"><div class="row"><button class="b big" id="bFr"><span class="ic">⬆</span>Ke depan</button><button class="b big" id="bBk"><span class="ic">⬇</span>Ke belakang</button><button class="b big" id="bRm"><span class="ic">✕</span>Hapus objek</button></div><div class="cap">Susun</div></div>
+  </div>
+  <div class="pane" id="p-insert">
+    <div class="grp"><div class="row"><button class="b big" id="iT"><span class="ic">T</span>Kotak teks</button><button class="b big" id="iR"><span class="ic">▭</span>Persegi</button><button class="b big" id="iE"><span class="ic">◯</span>Elips</button><button class="b big" id="iL"><span class="ic">―</span>Garis</button></div><div class="cap">Bentuk & Teks</div></div>
+    <div class="grp"><div class="row"><button class="b big" id="iI"><span class="ic">🖼</span>Gambar</button><input type="file" id="fi" accept="image/*" hidden></div><div class="cap">Ilustrasi</div></div>
+  </div>
+  <div class="pane" id="p-design">
+    <div class="grp"><div class="row" id="thm"></div><div class="cap">Tema</div></div>
+    <div class="grp"><div class="row"><label for="bgc">Latar slide&nbsp;</label><input type="color" id="bgc" value="#ffffff"></div><div class="cap">Latar belakang</div></div>
+  </div>
+  <div class="pane" id="p-view">
+    <div class="grp"><div class="row"><button class="b big" id="bPl"><span class="ic">▶</span>Presentasi</button><button class="b big" id="bFit"><span class="ic">↔</span>Sesuaikan</button><button class="b big" id="bTh"><span class="ic">◐</span>Tema layar</button></div><div class="cap">Tampilan</div></div>
+  </div>
+</div>
+<div id="main">
+  <div id="thumbs"></div>
+  <div id="area">
+    <div id="file">
+      <h2>File</h2>
+      <button id="fNew">📄 Presentasi baru</button>
+      <button id="fOpen">📂 Buka file proyek (.json)</button><input type="file" id="fin" accept=".json" hidden>
+      <button id="fPx">⬇ Simpan sebagai .pptx (PowerPoint asli)</button>
+      <button id="fJs">⬇ Simpan proyek (.json)</button>
+      <button id="fHt">⬇ Simpan slideshow (.html)</button>
+      <button id="fSave">💾 Simpan di browser</button>
+      <button id="fPrint">🖨 Cetak / Simpan PDF</button>
+      <button id="fClose">← Kembali</button>
     </div>
-    <div class="slide two">P</div>
+    <div id="wrap"><div id="stage"></div></div>
   </div>
-
-  <div class="message">
-    <strong>Whatitu PowerPoint belum tersedia.</strong><br>
-    Harap bersabar ya! Kami sedang mempersiapkan
-    aplikasi ini agar bisa segera digunakan.
-    Terima kasih sudah menunggu ♡
-  </div>
-
-  <a href="index.html" class="back">
-    ← Kembali ke Whatitu Office Maker
-  </a>
-
-  <footer>
-    © 2026 Whatitu Office Maker · Made for ideas ♡
-  </footer>
-
-</main>
-
+</div>
+<div id="st"><span id="pg">Slide 1 dari 1</span><span id="sv">Belum tersimpan</span><span class="sp"></span><span id="zl">100%</span><input type="range" id="zoom" min="20" max="200" value="100" aria-label="Zoom"></div>
+<div id="toast" role="status"></div>
+<div id="pres"><button id="pX" aria-label="Tutup">✕</button></div>
+<div id="pr"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pptxgenjs/3.12.0/pptxgen.bundle.js"></script>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)},KEY='ppt-web-v1',tm,uid=0,S,H=[],RD=[],zm=1,fit=true,drag=null;
+var TH=[{n:'Kuning',bg:'#ffffff',tx:'#252525',ac:'#f7c600'},{n:'Gelap',bg:'#1e1e2e',tx:'#f0f0f0',ac:'#f7c600'},{n:'Biru',bg:'#f0f6ff',tx:'#12306b',ac:'#2f6fed'},{n:'Hijau',bg:'#f1faf3',tx:'#14432a',ac:'#2e9e5b'},{n:'Merah',bg:'#fff4f2',tx:'#5a1a12',ac:'#d9482f'}];
+function say(m){var t=$('toast');t.textContent=m;t.className='show';clearTimeout(say.x);say.x=setTimeout(function(){t.className=''},1800)}
+function nid(){return 'e'+(++uid)+Math.random().toString(36).slice(2,6)}
+function T(x,y,w,h,t,o){return Object.assign({id:nid(),k:'t',x:x,y:y,w:w,h:h,t:t,fs:28,c:'#222222',b:0,i:0,u:0,a:'left',ff:'Calibri'},o)}
+function SH(k,x,y,w,h,f){return {id:nid(),k:k,x:x,y:y,w:w,h:h,f:f}}
+function th(){return TH[S.th||0]}
+function mkSlide(type){var q=th(),e=[SH('rect',0,0,960,14,q.ac)];
+  if(type==='title'){e.push(T(80,170,800,110,'Judul presentasi',{fs:56,b:1,a:'center',c:q.tx}),T(120,300,720,60,'Subjudul atau nama kamu',{fs:26,a:'center',c:q.tx}))}
+  else if(type==='content'){e.push(T(60,36,840,80,'Judul slide',{fs:40,b:1,c:q.tx}),T(60,140,840,340,'• Poin pertama\n• Poin kedua\n• Poin ketiga',{fs:28,c:q.tx}))}
+  return {bg:q.bg,els:e}}
+function cur(){return S.slides[S.cur]}
+function sel(){var s=cur();for(var i=0;i<s.els.length;i++)if(s.els[i].id===S.sel)return s.els[i];return null}
+function snap(){H.push(JSON.stringify(S));if(H.length>60)H.shift();RD=[]}
+function undo(){if(!H.length)return;RD.push(JSON.stringify(S));S=JSON.parse(H.pop());draw()}
+function redo(){if(!RD.length)return;H.push(JSON.stringify(S));S=JSON.parse(RD.pop());draw()}
+function mk(e){var d=document.createElement('div');d.className='el';d.dataset.id=e.id;var s=d.style;s.left=e.x+'px';s.top=e.y+'px';s.width=e.w+'px';s.height=e.h+'px';
+  if(e.k==='t'){d.textContent=e.t;s.fontSize=e.fs+'px';s.color=e.c;s.fontWeight=e.b?'700':'400';s.fontStyle=e.i?'italic':'normal';s.textDecoration=e.u?'underline':'none';s.textAlign=e.a;s.fontFamily='"'+e.ff+'",Calibri,Arial,sans-serif'}
+  else if(e.k==='img'){var m=document.createElement('img');m.src=e.src;m.style.cssText='width:100%;height:100%;object-fit:fill;pointer-events:none;-webkit-user-drag:none';d.appendChild(m)}
+  else{s.background=e.f;if(e.k==='ellipse')s.borderRadius='50%'}
+  return d}
+function slideNode(s){var n=document.createElement('div');n.className='st';n.style.background=s.bg;s.els.forEach(function(e){n.appendChild(mk(e))});return n}
+function drawThumbs(){var t=$('thumbs');t.innerHTML='';S.slides.forEach(function(s,i){var r=document.createElement('div');r.className='th'+(i===S.cur?' on':'');r.innerHTML='<i>'+(i+1)+'</i>';var m=document.createElement('div');m.className='mini';m.appendChild(slideNode(s));r.appendChild(m);r.onclick=function(){S.cur=i;S.sel=null;draw()};t.appendChild(r)})}
+function drawStage(){var st=$('stage');st.innerHTML='';st.style.background=cur().bg;cur().els.forEach(function(e){var d=mk(e);if(e.id===S.sel){d.classList.add('sel');var h=document.createElement('div');h.className='hd';h.dataset.h='1';d.appendChild(h)}st.appendChild(d)})}
+function syncUI(){var e=sel();$('bgc').value=cur().bg;if(e){$('ff').value=e.ff||'Calibri';$('fz').value=e.fs||28;$('fc').value=e.k==='t'?e.c:e.f||'#000000';$('bB').classList.toggle('on',!!e.b);$('bI').classList.toggle('on',!!e.i);$('bU').classList.toggle('on',!!e.u)}else{['bB','bI','bU'].forEach(function(i){$(i).classList.remove('on')})}
+  $('pg').textContent='Slide '+(S.cur+1)+' dari '+S.slides.length}
+function draw(){drawStage();drawThumbs();syncUI();zoom(zm);schedule()}
+function schedule(){$('sv').textContent='Menyimpan…';clearTimeout(tm);tm=setTimeout(save,700)}
+function save(){try{localStorage.setItem(KEY,JSON.stringify({t:$('title').value,s:S}));$('sv').textContent='Tersimpan'}catch(e){$('sv').textContent='Tidak tersimpan (penyimpanan penuh)'}}
+function load(){try{var d=JSON.parse(localStorage.getItem(KEY)||'null');if(d&&d.s&&d.s.slides&&d.s.slides.length){S=d.s;$('title').value=d.t||'Presentasi1';return}}catch(e){}
+  S={th:0,cur:0,sel:null,slides:[]};S.slides.push(mkSlide('title'))}
+function zoom(z){z=Math.max(.2,Math.min(2,z));zm=z;$('zoom').value=Math.round(z*100);$('zl').textContent=Math.round(z*100)+'%';$('stage').style.transform='scale('+z+')';var w=$('wrap');w.style.width=960*z+'px';w.style.height=540*z+'px'}
+function fitZ(){var a=$('area');zoom(Math.min((a.clientWidth-32)/960,(a.clientHeight-40)/540,1.5))}
+function pt(ev){var r=$('stage').getBoundingClientRect();return {x:(ev.clientX-r.left)/zm,y:(ev.clientY-r.top)/zm}}
+$('stage').addEventListener('pointerdown',function(ev){
+  var ed=ev.target.closest&&ev.target.closest('.ed');if(ed)return;
+  var n=ev.target.closest('.el');
+  if(!n){S.sel=null;drawStage();syncUI();return}
+  var e=cur().els.filter(function(x){return x.id===n.dataset.id})[0];if(!e)return;
+  var re=ev.target.dataset&&ev.target.dataset.h==='1',p=pt(ev);
+  if(S.sel!==e.id){S.sel=e.id;drawStage();syncUI()}
+  snap();drag={e:e,rs:re,px:p.x,py:p.y,x:e.x,y:e.y,w:e.w,h:e.h,moved:false};
+  try{$('stage').setPointerCapture(ev.pointerId)}catch(x){}
+  ev.preventDefault()});
+$('stage').addEventListener('pointermove',function(ev){if(!drag)return;var p=pt(ev),dx=p.x-drag.px,dy=p.y-drag.py,e=drag.e;
+  if(Math.abs(dx)+Math.abs(dy)>2)drag.moved=true;
+  if(drag.rs){e.w=Math.max(20,Math.round(drag.w+dx));e.h=Math.max(10,Math.round(drag.h+dy))}else{e.x=Math.round(drag.x+dx);e.y=Math.round(drag.y+dy)}
+  var n=$('stage').querySelector('[data-id="'+e.id+'"]');if(n){n.style.left=e.x+'px';n.style.top=e.y+'px';n.style.width=e.w+'px';n.style.height=e.h+'px'}});
+function endDrag(){if(!drag)return;if(!drag.moved)H.pop();drag=null;drawThumbs();schedule()}
+$('stage').addEventListener('pointerup',endDrag);$('stage').addEventListener('pointercancel',endDrag);
+$('stage').addEventListener('dblclick',function(ev){var n=ev.target.closest('.el'),e=sel();if(!n||!e||e.k!=='t'||n.dataset.id!==e.id)return;
+  var h=n.querySelector('.hd');if(h)h.remove();n.classList.add('ed');n.contentEditable='true';n.focus();
+  var r=document.createRange();r.selectNodeContents(n);r.collapse(false);var g=getSelection();g.removeAllRanges();g.addRange(r);
+  n.onblur=function(){var t=(n.innerText||'').replace(/\n$/,'');if(t!==e.t){snap();e.t=t}n.onblur=null;draw()}});
+function mod(f){var e=sel();if(!e)return say('Pilih objek dulu');snap();f(e);draw()}
+$('ff').onchange=function(){var v=this.value;mod(function(e){if(e.k==='t')e.ff=v})};
+$('fz').onchange=function(){var v=+this.value;mod(function(e){if(e.k==='t')e.fs=v})};
+$('fc').oninput=function(){var v=this.value;var e=sel();if(!e)return;e[e.k==='t'?'c':'f']=v;drawStage();drawThumbs();schedule()};
+$('fc').onchange=function(){};
+$('fc').addEventListener('pointerdown',function(){if(sel())snap()});
+$('bB').onclick=function(){mod(function(e){e.b=e.b?0:1})};
+$('bI').onclick=function(){mod(function(e){e.i=e.i?0:1})};
+$('bU').onclick=function(){mod(function(e){e.u=e.u?0:1})};
+document.querySelectorAll('[data-a]').forEach(function(b){b.onclick=function(){mod(function(e){e.a=b.dataset.a})}});
+[12,14,16,18,20,24,28,32,36,40,48,56,64,72,96].forEach(function(n){var o=document.createElement('option');o.value=n;o.textContent=n;$('fz').appendChild(o)});
+function add(e){snap();cur().els.push(e);S.sel=e.id;draw()}
+$('iT').onclick=function(){add(T(300,220,360,60,'Teks baru',{c:th().tx}))};
+$('iR').onclick=function(){add(SH('rect',360,190,240,160,th().ac))};
+$('iE').onclick=function(){add(SH('ellipse',380,170,200,200,th().ac))};
+$('iL').onclick=function(){add(SH('rect',280,265,400,6,th().tx))};
+$('iI').onclick=function(){$('fi').click()};
+$('fi').onchange=function(ev){var f=ev.target.files[0];ev.target.value='';if(!f)return;if(f.size>3e6)return say('Gambar maks. 3 MB');var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var w=Math.min(500,im.width),h=Math.round(w*im.height/im.width);if(h>440){h=440;w=Math.round(h*im.width/im.height)}add({id:nid(),k:'img',x:Math.round((960-w)/2),y:Math.round((540-h)/2),w:w,h:h,src:r.result})};im.src=r.result};r.readAsDataURL(f)};
+$('bNew').onclick=function(){snap();S.slides.splice(S.cur+1,0,mkSlide($('ly').value));S.cur++;S.sel=null;draw()};
+$('bDup').onclick=function(){snap();var c=JSON.parse(JSON.stringify(cur()));c.els.forEach(function(e){e.id=nid()});S.slides.splice(S.cur+1,0,c);S.cur++;S.sel=null;draw()};
+$('bDel').onclick=function(){if(S.slides.length<2)return say('Minimal satu slide');snap();S.slides.splice(S.cur,1);S.cur=Math.min(S.cur,S.slides.length-1);S.sel=null;draw()};
+function rm(){var e=sel();if(!e)return say('Pilih objek dulu');snap();var s=cur();s.els=s.els.filter(function(x){return x!==e});S.sel=null;draw()}
+$('bRm').onclick=rm;
+function ord(f){var e=sel();if(!e)return say('Pilih objek dulu');snap();var a=cur().els,i=a.indexOf(e);a.splice(i,1);if(f)a.push(e);else a.unshift(e);draw()}
+$('bFr').onclick=function(){ord(1)};$('bBk').onclick=function(){ord(0)};
+TH.forEach(function(q,i){var b=document.createElement('button');b.className='sw';b.title=q.n;b.style.background='linear-gradient(135deg,'+q.bg+' 50%,'+q.ac+' 50%)';b.onclick=function(){snap();S.th=i;S.slides.forEach(function(s){s.bg=q.bg;s.els.forEach(function(e){if(e.k==='t')e.c=q.tx;else if(e.k!=='img')e.f=q.ac})});draw()};$('thm').appendChild(b)});
+$('bgc').oninput=function(){cur().bg=this.value;drawStage();drawThumbs();schedule()};
+$('bgc').addEventListener('pointerdown',snap);
+$('qUn').onclick=undo;$('qRe').onclick=redo;
+$('qSave').onclick=function(){save();say('Tersimpan')};
+$('zoom').oninput=function(){fit=false;zoom(this.value/100)};
+$('bFit').onclick=function(){fit=true;fitZ()};
+$('bTh').onclick=function(){var r=document.documentElement,d=r.getAttribute('data-theme')?r.getAttribute('data-theme')==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.setAttribute('data-theme',d?'light':'dark')};
+document.querySelectorAll('#tabs button').forEach(function(b){b.onclick=function(){var t=b.dataset.t;if(t==='file'){$('file').classList.add('on');return}
+  document.querySelectorAll('#tabs button').forEach(function(x){x.classList.remove('on')});b.classList.add('on');
+  document.querySelectorAll('.pane').forEach(function(p){p.classList.toggle('on',p.id==='p-'+t)})}});
+var pi=0;function showP(){var p=$('pres'),n=p.querySelector('.st');if(n)n.remove();n=slideNode(S.slides[pi]);n.style.transform='scale('+Math.min(innerWidth/960,innerHeight/540)+')';p.insertBefore(n,p.firstChild)}
+function play(){pi=S.cur;$('pres').classList.add('on');showP();try{$('pres').requestFullscreen&&$('pres').requestFullscreen()}catch(e){}}
+function stop(){$('pres').classList.remove('on');try{document.fullscreenElement&&document.exitFullscreen()}catch(e){}}
+$('qPl').onclick=play;$('bPl').onclick=play;$('pX').onclick=function(ev){ev.stopPropagation();stop()};
+$('pres').onclick=function(ev){pi=Math.max(0,Math.min(S.slides.length-1,pi+(ev.clientX<innerWidth/3?-1:1)));showP()};
+function nm(){return ($('title').value||'presentasi').replace(/[^\w\- ]+/g,'').trim()||'presentasi'}
+function dl(ext,data){$('file').classList.remove('on');if(!window.claude||!claude.use){say('Simpan file tidak tersedia, pakai Cetak / PDF');return}
+  claude.use('downloads').then(function(d){if(!d){say('Simpan file tidak tersedia, pakai Cetak / PDF');return}
+  d.save({filename:nm()+'.'+ext,data:data}).then(function(){say('Tersimpan ke komputer')},function(e){say(e&&e.code==='declined'?'Dibatalkan':'Gagal menyimpan, pakai Cetak / PDF')})}).catch(function(){say('Simpan file tidak tersedia')})}
+$('fPx').onclick=function(){if(typeof PptxGenJS==='undefined')return say('Pustaka .pptx belum dimuat, coba lagi');
+  try{var p=new PptxGenJS();p.layout='LAYOUT_16x9';p.title=nm();
+  S.slides.forEach(function(s){var sl=p.addSlide();sl.background={color:s.bg.slice(1)};
+   s.els.forEach(function(e){var o={x:e.x/96,y:e.y/96,w:e.w/96,h:e.h/96};
+    if(e.k==='t'){var t={fontSize:Math.round(e.fs*.75),color:e.c.slice(1),bold:!!e.b,italic:!!e.i,align:e.a,fontFace:e.ff,valign:'top',margin:0};if(e.u)t.underline={style:'sng'};sl.addText(e.t||' ',Object.assign(o,t))}
+    else if(e.k==='img')sl.addImage(Object.assign(o,{data:e.src}));
+    else sl.addShape(e.k==='ellipse'?'ellipse':'rect',Object.assign(o,{fill:{color:e.f.slice(1)},line:{color:e.f.slice(1)}}))})});
+  p.write({outputType:'blob'}).then(function(b){dl('pptx',b)},function(){say('Gagal membuat .pptx')})}catch(x){say('Gagal membuat .pptx')}};
+$('fJs').onclick=function(){dl('json',JSON.stringify({t:$('title').value,s:S}))};
+$('fHt').onclick=function(){var h='<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+nm()+'</title><style>html,body{margin:0;height:100%;background:#000}.w{display:none;height:100%;align-items:center;justify-content:center}.w.on{display:flex}.st{width:960px;height:540px;position:relative;overflow:hidden;flex:none}.el{position:absolute;overflow:hidden;line-height:1.25;white-space:pre-wrap;word-break:break-word}</style></head><body>';
+  S.slides.forEach(function(s,i){h+='<div class="w'+(i?'':' on')+'">'+slideNode(s).outerHTML+'</div>'});
+  h+='<script>var w=document.querySelectorAll(".w"),i=0;function f(){var k=Math.min(innerWidth/960,innerHeight/540);document.querySelectorAll(".st").forEach(function(s){s.style.transform="scale("+k+")"})}function g(n){i=Math.max(0,Math.min(w.length-1,n));w.forEach(function(x,j){x.className="w"+(j==i?" on":"")})}onresize=f;f();onclick=function(e){g(i+(e.clientX<innerWidth/3?-1:1))};onkeydown=function(e){if(e.key=="ArrowRight"||e.key==" ")g(i+1);if(e.key=="ArrowLeft")g(i-1)};<\/script></body></html>';dl('html',h)};
+$('fSave').onclick=function(){save();say('Tersimpan di browser');$('file').classList.remove('on')};
+$('fNew').onclick=function(){if(confirm('Buat presentasi baru? Isi saat ini akan dihapus.')){$('title').value='Presentasi1';S={th:0,cur:0,sel:null,slides:[mkSlide('title')]};H=[];RD=[];$('file').classList.remove('on');draw()}};
+$('fOpen').onclick=function(){$('fin').click()};
+$('fin').onchange=function(ev){var f=ev.target.files[0];ev.target.value='';if(!f)return;if(f.size>20e6)return say('File terlalu besar');
+  f.text().then(function(t){try{var d=JSON.parse(t);if(!d.s||!Array.isArray(d.s.slides)||!d.s.slides.length)throw 0;snap();S=d.s;S.cur=0;S.sel=null;$('title').value=d.t||f.name.replace(/\.[^.]+$/,'');$('file').classList.remove('on');draw();say('Dibuka: '+f.name)}catch(e){say('File proyek tidak valid')}})};
+$('fPrint').onclick=function(){$('file').classList.remove('on');var p=$('pr');p.innerHTML='';S.slides.forEach(function(s){p.appendChild(slideNode(s))});setTimeout(function(){window.print()},60)};
+$('fClose').onclick=function(){$('file').classList.remove('on')};
+document.addEventListener('keydown',function(e){var ed=document.activeElement&&(document.activeElement.isContentEditable||/INPUT|SELECT/.test(document.activeElement.tagName)),k=e.key.toLowerCase();
+  if($('pres').classList.contains('on')){if(k==='escape')stop();if(k==='arrowright'||k===' '||k==='arrowdown'){pi=Math.min(S.slides.length-1,pi+1);showP()}if(k==='arrowleft'||k==='arrowup'){pi=Math.max(0,pi-1);showP()}return}
+  if((e.ctrlKey||e.metaKey)&&k==='s'){e.preventDefault();save();say('Tersimpan');return}
+  if(ed)return;
+  if((e.ctrlKey||e.metaKey)&&k==='z'){e.preventDefault();undo()}
+  else if((e.ctrlKey||e.metaKey)&&k==='y'){e.preventDefault();redo()}
+  else if(k==='delete'||k==='backspace'){if(sel()){e.preventDefault();rm()}}
+  else if(k.indexOf('arrow')===0&&sel()){e.preventDefault();var o=sel(),d=e.shiftKey?20:4;if(k==='arrowleft')o.x-=d;if(k==='arrowright')o.x+=d;if(k==='arrowup')o.y-=d;if(k==='arrowdown')o.y+=d;drawStage();drawThumbs();schedule()}});
+$('title').addEventListener('input',schedule);
+window.addEventListener('resize',function(){if(fit)fitZ()});
+load();draw();fitZ();
+})();
+</script>
 </body>
 </html>

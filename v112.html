@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -36,13 +35,15 @@ button,select,input{font:inherit;color:var(--txt)}
 .b.on{background:var(--act);border-color:var(--berry)}
 .b.big{flex-direction:column;height:56px;min-width:54px;font-size:12px;padding:2px 6px}
 .b.big .ic{font-size:22px;line-height:1.1}
-.b:focus-visible,select:focus-visible,#zoom:focus-visible{outline:2px solid #b38600;outline-offset:1px}
+.b:focus-visible,select:focus-visible,input:focus-visible,#zoom:focus-visible{outline:2px solid #b38600;outline-offset:1px}
 select,.cin{height:26px;background:var(--box);border:1px solid var(--line);border-radius:3px}
+.margin-grid{display:grid;grid-template-columns:repeat(2,auto);gap:3px 8px;padding:2px 0}
+.margin-grid label{display:flex;align-items:center;gap:3px;font-size:12px}
+.margin-grid input{width:58px;height:26px;background:var(--box);border:1px solid var(--line);border-radius:3px;padding:2px 4px}
 input[type=color]{width:28px;height:26px;padding:1px;background:var(--box);border:1px solid var(--line);border-radius:3px}
 #area{flex:1;overflow:auto;padding:24px 16px 60px;position:relative}
 #sheetwrap{margin:0 auto;transform-origin:top center;width:794px}
 #page{width:794px;min-height:1123px;background:#fff;color:#000;padding:96px;box-shadow:0 1px 6px rgba(0,0,0,.35);font:11pt/1.5 Calibri,Carlito,"Segoe UI",Arial,sans-serif;outline:none;overflow-wrap:anywhere;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 1117px,#c9c9c9 1117px,#c9c9c9 1123px);background-size:100% 1123px}
-#page.land{width:1123px;min-height:794px;background-size:100% 794px;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 788px,#c9c9c9 788px,#c9c9c9 794px)}
 #page h1{font:700 20pt Calibri,Carlito,Arial,sans-serif;color:#2f5496;margin:.5em 0 .2em}
 #page h2{font:700 15pt Calibri,Carlito,Arial,sans-serif;color:#2f5496;margin:.6em 0 .2em}
 #page h3{font:700 12pt Calibri,Carlito,Arial,sans-serif;color:#1f3763;margin:.6em 0 .2em}
@@ -104,7 +105,17 @@ input[type=color]{width:28px;height:26px;padding:1px;background:var(--box);borde
     <div class="grp"><div class="row"><button class="b big" id="bLink"><span class="ic">🔗</span>Tautan</button><button class="b big" id="bHr"><span class="ic">―</span>Garis</button><button class="b big" id="bDate"><span class="ic">📅</span>Tanggal</button><button class="b big" id="bSym"><span class="ic">Ω</span>Simbol</button></div><div class="cap">Tautan & Teks</div></div>
   </div>
   <div class="pane" id="p-layout">
-    <div class="grp"><div class="row"><select id="mg"><option value="96">Normal (2,5 cm)</option><option value="48">Sempit (1,25 cm)</option><option value="144">Lebar (3,8 cm)</option></select></div><div class="row"><select id="ori"><option value="p">Potret</option><option value="l">Lanskap</option></select></div><div class="cap">Pengaturan Halaman</div></div>
+    <div class="grp"><div class="row"><select id="paper" aria-label="Ukuran kertas">
+      <option value="A0">A0 (841 x 1189 mm)</option><option value="A1">A1 (594 x 841 mm)</option><option value="A2">A2 (420 x 594 mm)</option><option value="A3">A3 (297 x 420 mm)</option><option value="A4" selected>A4 (210 x 297 mm)</option><option value="A5">A5 (148 x 210 mm)</option><option value="A6">A6 (105 x 148 mm)</option><option value="A7">A7 (74 x 105 mm)</option><option value="A8">A8 (52 x 74 mm)</option><option value="A9">A9 (37 x 52 mm)</option><option value="A10">A10 (26 x 37 mm)</option>
+      <option value="B0">B0 (1000 x 1414 mm)</option><option value="B1">B1 (707 x 1000 mm)</option><option value="B2">B2 (500 x 707 mm)</option><option value="B3">B3 (353 x 500 mm)</option><option value="B4">B4 ISO (250 x 353 mm)</option><option value="B5">B5 ISO (176 x 250 mm)</option><option value="B6">B6 (125 x 176 mm)</option><option value="B7">B7 (88 x 125 mm)</option><option value="B8">B8 (62 x 88 mm)</option><option value="B9">B9 (44 x 62 mm)</option><option value="B10">B10 (31 x 44 mm)</option>
+      <option value="F4">F4 Indonesia (210 x 330 mm)</option><option value="FOLIO">Folio (216 x 330 mm)</option><option value="LETTER">Letter (216 x 279 mm)</option><option value="LEGAL">Legal (216 x 356 mm)</option><option value="TABLOID">Tabloid / Ledger (279 x 432 mm)</option><option value="EXECUTIVE">Executive (184 x 267 mm)</option><option value="STATEMENT">Statement (140 x 216 mm)</option><option value="QUARTO">Quarto (215 x 275 mm)</option><option value="JISB4">JIS B4 (257 x 364 mm)</option><option value="JISB5">JIS B5 (182 x 257 mm)</option>
+    </select></div><div class="row"><select id="ori" aria-label="Orientasi halaman"><option value="p">Potret</option><option value="l">Lanskap</option></select></div><div class="cap">Ukuran & Orientasi</div></div>
+    <div class="grp"><div class="margin-grid">
+      <label for="mt">Atas <input id="mt" type="number" min="0" max="50" step="0.1" value="2.54" aria-label="Margin atas dalam sentimeter"> cm</label>
+      <label for="mb">Bawah <input id="mb" type="number" min="0" max="50" step="0.1" value="2.54" aria-label="Margin bawah dalam sentimeter"> cm</label>
+      <label for="ml">Kiri <input id="ml" type="number" min="0" max="50" step="0.1" value="2.54" aria-label="Margin kiri dalam sentimeter"> cm</label>
+      <label for="mr">Kanan <input id="mr" type="number" min="0" max="50" step="0.1" value="2.54" aria-label="Margin kanan dalam sentimeter"> cm</label>
+    </div><div class="cap">Margin (cm)</div></div>
   </div>
   <div class="pane" id="p-view">
     <div class="grp"><div class="row"><button class="b big" id="bZ1"><span class="ic">100</span>100%</button><button class="b big" id="bZf"><span class="ic">↔</span>Lebar halaman</button><button class="b big" id="bTh"><span class="ic">◐</span>Tema</button></div><div class="cap">Zoom</div></div>
@@ -116,7 +127,6 @@ input[type=color]{width:28px;height:26px;padding:1px;background:var(--box);borde
     <button id="fNew">📄 Dokumen baru</button>
     <button id="fOpen">📂 Buka file (.docx, .doc, .html, .txt)</button><input type="file" id="fin" accept=".docx,.doc,.html,.htm,.txt,.md,.csv" hidden>
     <button id="fDoc">⬇ Simpan sebagai .doc (Word)</button>
-    <button id="fDx">⬇ Simpan sebagai .docx</button>
     <button id="fSave">💾 Simpan di browser</button>
     <button id="fPrint">🖨 Cetak / Simpan PDF</button>
     <button id="fHtml">⬇ Simpan sebagai .html</button>
@@ -128,15 +138,47 @@ input[type=color]{width:28px;height:26px;padding:1px;background:var(--box);borde
 </div>
 <div id="st"><span id="pg">Halaman 1 dari 1</span><span id="wc">0 kata</span><span id="sv">Belum tersimpan</span><span class="sp"></span><span id="zl">100%</span><input type="range" id="zoom" min="40" max="200" value="100" aria-label="Zoom"></div>
 <div id="toast" role="status"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 <style id="print-page-style">@page{size:A4 portrait;margin:25.4mm}</style>
 <script>
 (function(){
 var $=function(i){return document.getElementById(i)},page=$('page'),area=$('area'),wrap=$('sheetwrap'),KEY='word-web-v1',tm;
+var PAPER={A0:[841,1189],A1:[594,841],A2:[420,594],A3:[297,420],A4:[210,297],A5:[148,210],A6:[105,148],A7:[74,105],A8:[52,74],A9:[37,52],A10:[26,37],B0:[1000,1414],B1:[707,1000],B2:[500,707],B3:[353,500],B4:[250,353],B5:[176,250],B6:[125,176],B7:[88,125],B8:[62,88],B9:[44,62],B10:[31,44],F4:[210,330],FOLIO:[216,330],LETTER:[216,279],LEGAL:[216,356],TABLOID:[279,432],EXECUTIVE:[184,267],STATEMENT:[140,216],QUARTO:[215,275],JISB4:[257,364],JISB5:[182,257]};
+var margins={top:2.54,right:2.54,bottom:2.54,left:2.54},marginFields={top:'mt',right:'mr',bottom:'mb',left:'ml'};
+function paperSize(){
+ var dimensions=PAPER[$('paper').value]||PAPER.A4,w=dimensions[0],h=dimensions[1];
+ if(page.classList.contains('land')){var swap=w;w=h;h=swap}
+ return {widthMm:w,heightMm:h,widthPx:w*96/25.4,heightPx:h*96/25.4}
+}
+function applyPaperSize(){
+ var size=paperSize(),edge=size.heightPx-6;
+ page.style.width=size.widthPx+'px';page.style.minHeight=size.heightPx+'px';
+ page.style.backgroundImage='repeating-linear-gradient(to bottom,transparent 0,transparent '+edge+'px,#c9c9c9 '+edge+'px,#c9c9c9 '+size.heightPx+'px)';
+ page.style.backgroundSize='100% '+size.heightPx+'px'
+}
+function marginMm(value){return (Math.round(value*100)/10)+'mm'}
+function validMargins(values){
+ var size=paperSize();
+ return ['top','right','bottom','left'].every(function(side){return Number.isFinite(values[side])&&values[side]>=0&&values[side]<=50})&&values.top+values.bottom<size.heightMm/10&&values.left+values.right<size.widthMm/10
+}
+function defaultMargins(){
+ var size=paperSize(),cm=Math.min(2.54,size.widthMm/40,size.heightMm/40);
+ return {top:cm,right:cm,bottom:cm,left:cm}
+}
+function setMargins(values){
+ margins=values;
+ ['top','right','bottom','left'].forEach(function(side){$(marginFields[side]).value=String(margins[side])});
+ page.style.padding=[margins.top,margins.right,margins.bottom,margins.left].map(function(value){return value*96/2.54+'px'}).join(' ')
+}
+function readMarginFields(){
+ var values={};
+ ['top','right','bottom','left'].forEach(function(side){values[side]=$(marginFields[side]).valueAsNumber});
+ if(!validMargins(values)){say('Margin harus 0–50 cm dan jumlah tiap sisi tidak boleh melebihi ukuran kertas');setMargins(margins);return false}
+ setMargins(values);return true
+}
 function say(m){var t=$('toast');t.textContent=m;t.className='show';clearTimeout(say.x);say.x=setTimeout(function(){t.className=''},1800)}
 function ex(c,v){page.focus();document.execCommand(c,false,v==null?null:v);upd()}
-function printRules(){var pad=parseFloat(page.style.padding)||96,mm=Math.round(pad*0.264583*100)/100;$('print-page-style').textContent='@page{size:A4 '+(page.classList.contains('land')?'landscape':'portrait')+';margin:'+mm+'mm}'}
+function printRules(){var size=paperSize();$('print-page-style').textContent='@page{size:'+size.widthMm+'mm '+size.heightMm+'mm;margin:'+marginMm(margins.top)+' '+marginMm(margins.right)+' '+marginMm(margins.bottom)+' '+marginMm(margins.left)+'}'}
 [8,9,10,11,12,14,16,18,20,24,28,36,48,72].forEach(function(n){var o=document.createElement('option');o.value=n;o.textContent=n;if(n===11)o.selected=true;$('fz').appendChild(o)});
 function sizePt(pt){
   page.focus();document.execCommand('fontSize',false,'7');
@@ -147,14 +189,21 @@ function zoom(z){z=Math.max(40,Math.min(200,z));$('zoom').value=z;$('zl').textCo
 function upd(){
   var t=(page.innerText||'').trim(),w=t?t.split(/\s+/).length:0;
   $('wc').textContent=w+' kata';
-  var ph=page.classList.contains('land')?794:1123,pad=parseFloat(getComputedStyle(page).paddingTop)||96;
-  var content=Math.max(0,page.scrollHeight-pad*2),usable=Math.max(1,ph-pad*2);
+  var ph=Math.ceil(paperSize().heightPx),padTop=margins.top*96/2.54,padBottom=margins.bottom*96/2.54;
+  var content=Math.max(0,page.scrollHeight-padTop-padBottom),usable=Math.max(1,ph-padTop-padBottom);
   $('pg').textContent='Halaman 1 dari '+Math.max(1,Math.ceil(content/usable));
   $('sv').textContent='Menyimpan…';clearTimeout(tm);tm=setTimeout(save,700);
   zoom(+$('zoom').value);sync();
 }
-function save(){try{localStorage.setItem(KEY,JSON.stringify({t:$('title').value,h:page.innerHTML,l:page.style.lineHeight,m:page.style.padding,o:page.classList.contains('land')?'l':'p'}));$('sv').textContent='Tersimpan'}catch(e){$('sv').textContent='Tidak tersimpan'}}
-function load(){try{var d=JSON.parse(localStorage.getItem(KEY)||'null');if(d){$('title').value=d.t||'Dokumen1';page.innerHTML=d.h||'';page.style.lineHeight=d.l||'';page.style.padding=d.m||'';page.classList.toggle('land',d.o==='l');$('ori').value=d.o==='l'?'l':'p';if(d.m)$('mg').value=String(parseFloat(d.m)||96)}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify({t:$('title').value,h:page.innerHTML,l:page.style.lineHeight,m:page.style.padding,r:margins,o:page.classList.contains('land')?'l':'p',s:$('paper').value}));$('sv').textContent='Tersimpan'}catch(e){$('sv').textContent='Tidak tersimpan'}}
+function load(){try{var d=JSON.parse(localStorage.getItem(KEY)||'null');if(d){$('title').value=d.t||'Dokumen1';page.innerHTML=d.h||'';page.style.lineHeight=d.l||'';page.classList.toggle('land',d.o==='l');$('ori').value=d.o==='l'?'l':'p';if(d.s&&PAPER[d.s])$('paper').value=d.s;
+  var savedMargins=d.r&&['top','right','bottom','left'].every(function(side){return Number.isFinite(d.r[side])})?d.r:null;
+  if(!savedMargins&&d.m){var oldMargin=parseFloat(d.m)*2.54/96;if(Number.isFinite(oldMargin))savedMargins={top:oldMargin,right:oldMargin,bottom:oldMargin,left:oldMargin}}
+  if(savedMargins&&validMargins(savedMargins))margins=savedMargins;
+  else margins=defaultMargins()
+ }}catch(e){}
+  setMargins(margins);
+  applyPaperSize();
   if(!page.innerHTML.trim())page.innerHTML='<p class="ttl">Judul dokumen</p><p>Mulai mengetik di sini. Pakai tab Beranda untuk font dan paragraf, Sisipkan untuk tabel dan gambar, Tata Letak untuk margin dan orientasi.</p>'}
 function sync(){['bold','italic','underline','strikeThrough','subscript','superscript','insertUnorderedList','insertOrderedList','justifyLeft','justifyCenter','justifyRight','justifyFull'].forEach(function(c){var b=document.querySelector('.b[data-c="'+c+'"]');if(!b)return;var on=false;try{on=document.queryCommandState(c)}catch(e){}b.classList.toggle('on',on)})}
 document.querySelectorAll('[data-c]').forEach(function(b){b.addEventListener('mousedown',function(e){e.preventDefault()});b.addEventListener('click',function(){ex(b.dataset.c)})});
@@ -168,8 +217,9 @@ $('fz').onchange=function(e){sizePt(e.target.value)};
 $('fc').oninput=function(e){ex('foreColor',e.target.value)};
 $('hc').oninput=function(e){ex('hiliteColor',e.target.value)};
 $('ls').onchange=function(e){page.style.lineHeight=e.target.value;upd()};
-$('mg').onchange=function(e){page.style.padding=e.target.value+'px';printRules();upd()};
-$('ori').onchange=function(e){page.classList.toggle('land',e.target.value==='l');printRules();upd()};
+$('paper').onchange=function(){applyPaperSize();if(!validMargins(margins)){margins=defaultMargins();setMargins(margins);say('Margin disesuaikan agar muat di ukuran kertas')}printRules();upd()};
+$('ori').onchange=function(e){page.classList.toggle('land',e.target.value==='l');applyPaperSize();if(!validMargins(margins)){margins=defaultMargins();setMargins(margins);say('Margin disesuaikan agar muat di orientasi halaman')}printRules();upd()};
+['mt','mr','mb','ml'].forEach(function(id){$(id).onchange=function(){if(readMarginFields()){printRules();upd()}}});
 $('bHr').onclick=function(){ex('insertHorizontalRule')};
 $('bPb').onclick=function(){ex('insertHTML','<hr class="pb"><p><br></p>')};
 $('bDate').onclick=function(){ex('insertText',new Date().toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'}))};
@@ -202,9 +252,9 @@ function dl(ext,data,type){
  catch(e){say('Gagal mengunduh file '+ext)}
  $('file').classList.remove('on')}
 function wordHtml(){
- var landscape=page.classList.contains('land'),margin=Math.round((parseFloat(page.style.padding)||96)*0.264583);
+ var size=paperSize(),margin=[margins.top,margins.right,margins.bottom,margins.left].map(marginMm).join(' ');
  var content=page.innerHTML.replace(/<hr\b[^>]*class=(["'])pb\1[^>]*>/gi,'<br style="page-break-before:always;mso-break-type:section-break">');
- return '<!DOCTYPE html><html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><title>'+esc(nm())+'</title><!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom></w:WordDocument></xml><![endif]--><style>@page{size:'+ (landscape?'landscape':'portrait')+';margin:'+margin+'mm}body{font-family:Calibri,Arial,sans-serif;font-size:11pt;line-height:'+ (page.style.lineHeight||'1.5')+'}table{border-collapse:collapse;width:100%}td{border:1px solid #888;padding:5px 7px}img{max-width:100%}h1{color:#2f5496}h2{color:#2f5496}</style></head><body>'+content+'</body></html>'}
+ return '<!DOCTYPE html><html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><title>'+esc(nm())+'</title><!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom></w:WordDocument></xml><![endif]--><style>@page{size:'+size.widthMm+'mm '+size.heightMm+'mm;margin:'+margin+'}body{font-family:Calibri,Arial,sans-serif;font-size:11pt;line-height:'+ (page.style.lineHeight||'1.5')+'}table{border-collapse:collapse;width:100%}td{border:1px solid #888;padding:5px 7px}img{max-width:100%}h1{color:#2f5496}h2{color:#2f5496}</style></head><body>'+content+'</body></html>'}
 $('fDoc').onclick=function(){dl('doc',wordHtml(),'application/msword')};
 $('fHtml').onclick=function(){dl('html',wordHtml(),'text/html;charset=utf-8')};
 $('fTx').onclick=function(){var t=page.innerText;if(!t.trim()){say('Dokumen kosong');return}dl('txt',t)};
@@ -303,7 +353,6 @@ function clean(html){var d=new DOMParser().parseFromString(html,'text/html');
  d.querySelectorAll('*').forEach(function(e){[].slice.call(e.attributes).forEach(function(a){var n=a.name.toLowerCase(),v=a.value;
   if(n.indexOf('on')===0||n==='srcset'||((n==='href'||n==='src')&&/^\s*(javascript|vbscript|data:(?!image\/))/i.test(v)))e.removeAttribute(a.name)})});
  return d.body.innerHTML}
-$('fDx').onclick=saveDocx;
 $('fOpen').onclick=function(){$('fin').click()};
 $('fin').onchange=function(e){var f=e.target.files[0];e.target.value='';if(!f)return;
  var x=(f.name.split('.').pop()||'').toLowerCase(),base=f.name.replace(/\.[^.]+$/,'');
